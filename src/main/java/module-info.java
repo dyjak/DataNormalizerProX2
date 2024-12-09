@@ -1,6 +1,7 @@
 module datanormalizer.datanormalizerprox2 {
     requires javafx.controls;
     requires javafx.fxml;
+    requires atlantafx.base;
 
 
     opens datanormalizer.datanormalizerprox2 to javafx.fxml;

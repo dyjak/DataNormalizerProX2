@@ -18,25 +18,25 @@ public class PanelController {
     private Button refreshButton;
 
     @FXML
-    private TableView<ObservableList<String>> tableView;
+    private TableView<ObservableList<String>> tableViewRaw;
 
     // Obsługa przycisku "Załaduj plik CSV"
     @FXML
     public void handleLoadButtonAction() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Wybierz plik CSV");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Pliki CSV", "*.csv"));
+        fileChooser.setTitle("Look for CSV file ...");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
 
         Stage stage = (Stage) loadButton.getScene().getWindow();
         File selectedFile = fileChooser.showOpenDialog(stage);
         if (selectedFile != null) {
-            CsvLoader.loadCsvData(selectedFile, tableView);
+            CsvLoader.loadCsvData(selectedFile, tableViewRaw);
         }
     }
 
     // Obsługa przycisku "Odśwież dane"
     @FXML
     public void handleRefreshButtonAction() {
-        CsvLoader.reloadCsvData(tableView);
+        CsvLoader.reloadCsvData(tableViewRaw);
     }
 }

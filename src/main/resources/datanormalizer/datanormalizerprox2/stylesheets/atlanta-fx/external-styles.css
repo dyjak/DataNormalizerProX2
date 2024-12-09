@@ -1,0 +1,28 @@
+.hbox-main {
+    /*-fx-background-color: rgba(0, 0, 0, 0.54);*/
+    -fx-spacing: 15px;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 2px;
+}
+
+.hbox-style1 {
+    -fx-background-color: rgba(43, 0, 59, 0.38);
+    -fx-padding: 10px;
+    -fx-spacing: 15px;
+    -fx-border-color: #4c566a;
+    -fx-border-width: 2px;
+}
+
+.hbox-style2 {
+    -fx-background-color: rgba(0, 61, 14, 0.25);
+    -fx-padding: 10px;
+    -fx-spacing: 15px;
+    -fx-border-color: #4c566a;
+    -fx-border-width: 2px;
+}
+
+.hbox-style3 {
+    -fx-background-color: rgba(0, 0, 0, 0.54);
+    -fx-spacing: 15px;
+}
+

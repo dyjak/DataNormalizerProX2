@@ -1,5 +1,6 @@
 package datanormalizer.datanormalizerprox2.General;
 
+import datanormalizer.datanormalizerprox2.AppManager;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -56,6 +57,7 @@ public class CsvLoader {
                         TableColumn<ObservableList<String>, String> column = new TableColumn<>(values[i]);
                         column.setCellValueFactory(data ->
                                 new SimpleStringProperty(data.getValue().get(columnIndex)));
+                        column.setPrefWidth((int)(AppManager.WIDTH/(values.length+1)));
                         tableView.getColumns().add(column);
                     }
                     isHeader = false;

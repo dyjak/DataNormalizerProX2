@@ -1,5 +1,4 @@
 package datanormalizer.datanormalizerprox2.Controllers;
-
 import datanormalizer.datanormalizerprox2.General.CsvLoader;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

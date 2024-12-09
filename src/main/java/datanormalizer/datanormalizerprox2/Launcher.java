@@ -1,5 +1,6 @@
 package datanormalizer.datanormalizerprox2;
-
+import datanormalizer.datanormalizerprox2.Controllers.PanelController;
+import datanormalizer.datanormalizerprox2.General.CsvLoader;
 import datanormalizer.datanormalizerprox2.AppManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

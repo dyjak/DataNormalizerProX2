@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="your.package.PanelController" spacing="10" alignment="TOP_CENTER">
-    <Button fx:id="loadButton" text="Załaduj plik CSV" />
-    <Button fx:id="refreshButton" text="Odśwież dane" />
-    <TableView fx:id="tableView" prefWidth="1280" prefHeight="720" />
+<VBox alignment="TOP_CENTER" spacing="10" styleClass="modal-box" stylesheets="@stylesheets/atlanta-fx/dracula.css, @stylesheets/atlanta-fx/external-styles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="datanormalizer.datanormalizerprox2.Controllers.PanelController">
+   <children>
+       <Button fx:id="loadButton" onAction="#handleLoadButtonAction" text="Załaduj plik CSV" />
+       <Button fx:id="refreshButton" onAction="#handleRefreshButtonAction" text="Odśwież dane" />
+       <TableView fx:id="tableView" prefHeight="400" prefWidth="800" />
+   </children>
 </VBox>

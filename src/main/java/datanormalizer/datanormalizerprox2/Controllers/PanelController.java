@@ -8,6 +8,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 
 public class PanelController {
 
@@ -22,7 +23,7 @@ public class PanelController {
 
     // Obsługa przycisku "Załaduj plik CSV"
     @FXML
-    public void handleLoadButtonAction() {
+    public void handleLoadButtonAction() throws IOException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Look for CSV file ...");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));

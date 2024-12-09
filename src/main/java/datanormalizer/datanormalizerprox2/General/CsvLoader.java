@@ -23,8 +23,9 @@ public class CsvLoader {
      * @param file      Plik CSV do wczytania.
      * @param tableView Obiekt TableView, do którego dane zostaną załadowane.
      */
-    public static void loadCsvData(File file, TableView<ObservableList<String>> tableView) {
+    public static void loadCsvData(File file, TableView<ObservableList<String>> tableView) throws IOException {
         lastLoadedFile = file; // Zapisanie pliku jako ostatnio załadowanego
+        AppManager.CURRENT_FILE=file;
         reloadCsvData(tableView);
     }
 
@@ -33,11 +34,14 @@ public class CsvLoader {
      *
      * @param tableView Obiekt TableView, którego dane mają być odświeżone.
      */
+
+
     public static void reloadCsvData(TableView<ObservableList<String>> tableView) {
         if (lastLoadedFile == null) {
-            System.out.println("Brak pliku do odświeżenia!");
+            System.out.println("No file selected!");
             return;
         }
+
 
         // Usunięcie istniejących kolumn i danych
         tableView.getColumns().clear();
@@ -70,5 +74,7 @@ public class CsvLoader {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        //tableView.getParent().set(AppManager.CURRENT_FILE.getName());
+        AppManager.printAppAttributes();
     }
 }

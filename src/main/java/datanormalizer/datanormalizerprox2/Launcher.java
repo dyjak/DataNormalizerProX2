@@ -27,6 +27,8 @@ public class Launcher extends Application {
         primaryStage.setTitle(AppManager.TITLE);
         primaryStage.setResizable(false);
         primaryStage.show();
+
+        AppManager.printAppAttributes();
     }
 
     public static void main(String[] args) {

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="your.package.PanelController" spacing="10" alignment="TOP_CENTER">
+    <Button fx:id="loadButton" text="Załaduj plik CSV" />
+    <Button fx:id="refreshButton" text="Odśwież dane" />
+    <TableView fx:id="tableView" prefWidth="1280" prefHeight="720" />
+</VBox>

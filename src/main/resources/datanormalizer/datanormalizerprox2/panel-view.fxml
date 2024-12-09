@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" spacing="10" styleClass="hbox-main" stylesheets="@stylesheets/atlanta-fx/dracula, @stylesheets/atlanta-fx/external-styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="datanormalizer.datanormalizerprox2.Controllers.PanelController">
+<VBox alignment="TOP_CENTER" spacing="10" styleClass="hbox-main" stylesheets="@stylesheets/css/external-styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="datanormalizer.datanormalizerprox2.Controllers.PanelController">
    <children>
       <HBox prefHeight="0.0" prefWidth="1280.0">
          <children>

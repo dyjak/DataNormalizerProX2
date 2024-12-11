@@ -5,13 +5,19 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import datanormalizer.datanormalizerprox2.AppManager;
+
 public class PythonScriptExecutor {
 
-    public static void executePythonScript(String scriptPath, String inputFilePath, String outputFilePath, int neighbors) {
+    public static void knnExecutor(int neighbors) {
         try {
+            String scriptPath = "D:\\SHARED\\Informatyka URZ\\S5\\IMED\\DataNormalizerProX2\\src\\main\\java\\datanormalizer\\datanormalizerprox2\\Scripts\\.venv\\knn.py";
+            String inputFilePath = AppManager.CURRENT_FILE.getAbsolutePath();
+            String outputFilePath = AppManager.CURRENT_FILE.getPath().concat("test-processed.csv");
+            System.out.println("outputFilePath: " + outputFilePath);
             // Tworzenie komendy do uruchomienia Pythona
             List<String> command = new ArrayList<>();
-            command.add("python"); // Lub "python3" w zależności od środowiska
+            command.add("py");
             command.add(scriptPath);
             command.add(inputFilePath);
             command.add(outputFilePath);
@@ -42,15 +48,5 @@ public class PythonScriptExecutor {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-        // Przykładowe użycie
-        String scriptPath = "path/to/script.py"; // Ścieżka do skryptu
-        String inputFilePath = "path/to/input.csv"; // Plik wejściowy
-        String outputFilePath = "path/to/output.csv"; // Plik wyjściowy
-        int neighbors = 5; // Liczba sąsiadów
-
-        executePythonScript(scriptPath, inputFilePath, outputFilePath, neighbors);
     }
 }

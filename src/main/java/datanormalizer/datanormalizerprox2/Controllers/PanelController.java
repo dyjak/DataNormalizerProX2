@@ -1,5 +1,6 @@
 package datanormalizer.datanormalizerprox2.Controllers;
 import datanormalizer.datanormalizerprox2.General.CsvLoader;
+import datanormalizer.datanormalizerprox2.General.PythonScriptExecutor;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -17,6 +18,9 @@ public class PanelController {
 
     @FXML
     private Button refreshButton;
+
+    @FXML
+    private Button knnButton;
 
     @FXML
     private TableView<ObservableList<String>> tableViewRaw;
@@ -39,5 +43,11 @@ public class PanelController {
     @FXML
     public void handleRefreshButtonAction() {
         CsvLoader.reloadCsvData(tableViewRaw);
+    }
+
+    @FXML
+    public void handleKnnButtonAction()
+    {
+        PythonScriptExecutor.knnExecutor(1);
     }
 }

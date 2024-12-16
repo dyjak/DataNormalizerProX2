@@ -38,7 +38,6 @@ public class CsvLoader {
      * @param tableView Obiekt TableView, którego dane mają być odświeżone.
      */
 
-
     public static void reloadCsvData(TableView<ObservableList<String>> tableView) {
         if (lastLoadedFile == null) {
             System.out.println("No file selected!");

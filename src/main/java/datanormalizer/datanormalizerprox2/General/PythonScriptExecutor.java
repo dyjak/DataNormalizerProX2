@@ -1,36 +1,24 @@
 package datanormalizer.datanormalizerprox2.General;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import datanormalizer.datanormalizerprox2.AppManager;
-
 public class PythonScriptExecutor {
 
-    public static void knnExecutor(int neighbors) {
+    public static void executeScript(String scriptName, List<String> args) {
         try {
-            String scriptPath = "D:\\SHARED\\Informatyka URZ\\S5\\IMED\\DataNormalizerProX2\\src\\main\\java\\datanormalizer\\datanormalizerprox2\\Scripts\\.venv\\knn.py";
-            String inputFilePath = AppManager.CURRENT_FILE.getAbsolutePath();
-            String outputFilePath = AppManager.CURRENT_FILE.getPath().concat("test-processed.csv");
-            System.out.println("outputFilePath: " + outputFilePath);
-            // Tworzenie komendy do uruchomienia Pythona
-            List<String> command = new ArrayList<>();
-            command.add("py");
-            command.add(scriptPath);
-            command.add(inputFilePath);
-            command.add(outputFilePath);
-            command.add(String.valueOf(neighbors));
+            String scriptPath = getScriptPath(scriptName);
+            validateFilePath(scriptPath);
 
-            // Budowanie procesu
-            ProcessBuilder processBuilder = new ProcessBuilder(command);
-            processBuilder.redirectErrorStream(true); // Przekierowanie błędów do stdout
+            List<String> command = buildCommand(scriptPath, args);
+            System.out.println("Executing command: " + String.join(" ", command));
 
-            // Uruchamianie procesu
-            Process process = processBuilder.start();
+            Process process = new ProcessBuilder(command).redirectErrorStream(true).start();
 
-            // Czytanie wyjścia skryptu Pythona
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
@@ -38,15 +26,45 @@ public class PythonScriptExecutor {
                 }
             }
 
-            // Oczekiwanie na zakończenie procesu
             int exitCode = process.waitFor();
-            if (exitCode == 0) {
-                System.out.println("Skrypt zakończył się sukcesem.");
-            } else {
-                System.out.println("Skrypt zakończył się błędem. Kod wyjścia: " + exitCode);
+            if (exitCode != 0) {
+                throw new RuntimeException("Script execution failed with exit code: " + exitCode);
             }
+
+            System.out.println("Script executed successfully.");
+
+        } catch (IOException e) {
+            System.err.println("I/O error: " + e.getMessage());
         } catch (Exception e) {
+            System.err.println("Execution error: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    private static String getScriptPath(String scriptName) {
+        return new File("src/main/java/datanormalizer/datanormalizerprox2/Scripts/scripts_all.py").getAbsolutePath();
+    }
+
+    private static void validateFilePath(String path) throws IOException {
+        if (!new File(path).exists()) {
+            throw new IOException("Script not found: " + path);
+        }
+    }
+
+    private static List<String> buildCommand(String scriptPath, List<String> args) {
+        List<String> command = new ArrayList<>();
+        command.add("py");
+        command.add(scriptPath);
+        command.addAll(args);
+        return command;
+    }
+
+    public static void execute(String mode, String inputPath, String outputPath, String param) {
+        List<String> args = new ArrayList<>();
+        args.add(mode); // Tryb pracy skryptu (np. "knn", "kmeans")
+        args.add(inputPath); // Ścieżka pliku wejściowego
+        args.add(outputPath); // Ścieżka pliku wyjściowego
+        args.add(param); // Parametr specyficzny dla trybu
+        executeScript(getScriptPath("scripts_all"), args);
     }
 }

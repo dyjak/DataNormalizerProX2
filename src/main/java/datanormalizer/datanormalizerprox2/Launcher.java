@@ -11,15 +11,23 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 
 public class Launcher extends Application {
+
+
+        public static final String RESOURCE_PATH = "/";  // Assuming FXML files are in the root package
+
+        public static URL getResource(String fileName) {
+            return Launcher.class.getResource(fileName);
+        }
+
 
     @Override
     public void start(Stage primaryStage) throws IOException {
 
         //AtlantaFX Theme
         Application.setUserAgentStylesheet(new NordDark().getUserAgentStylesheet());
-
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("panel-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), AppManager.WIDTH, AppManager.HEIGHT, true);

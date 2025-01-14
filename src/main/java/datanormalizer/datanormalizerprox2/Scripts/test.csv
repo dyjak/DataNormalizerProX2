@@ -1,0 +1,11 @@
+ID,Name,Age,Gender,City,Salary,Department
+1,John Doe,29,Male,New York,55000,IT
+2,Jane Smith,34,Female,Los Angeles,68000,Marketing
+3,Bob Johnson,45,Male,Chicago,72000,Sales
+4,Alice Davis,28,Female,Houston,,HR
+5,Chris Brown,37,Male,Phoenix,53000,Finance
+6,Patricia Miller,,Female,Philadelphia,60000,IT
+7,Michael Wilson,32,Male,San Antonio,75000,Engineering
+8,Emily Moore,25,Female,San Diego,47000,Marketing
+9,James Taylor,50,Male,Dallas,80000,Sales
+10,Linda Anderson,27,Female,San Jose,52000,HR

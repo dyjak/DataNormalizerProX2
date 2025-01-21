@@ -53,7 +53,29 @@ public class PanelController {
     @FXML
     private TableView<ObservableList<String>> tableViewProcessed;
 
+    @FXML
+    private TextField knnParamField;
+
+    @FXML
+    private TextField outlierParamField;
+
+    @FXML
+    private TextField clusterParamField;
+
+    @FXML
+    private TextField pcaParamField;
+
+    @FXML
+    private ComboBox<String> standardizeParamField;
+
     public void initialize() {
+        initializeSettings();
+
+        knnParamField.setText("3");
+        outlierParamField.setText("0.1");
+        clusterParamField.setText("4");
+        pcaParamField.setText("5");
+        standardizeParamField.setValue("minmax");
         initializeSettings();
     }
 
@@ -94,28 +116,34 @@ public class PanelController {
 
     @FXML
     public void handleKnnButtonAction() {
-        executeScript("knn", "3");
+        String param = knnParamField.getText().isEmpty() ? "3" : knnParamField.getText();
+        executeScript("knn", param);
     }
 
     @FXML
     public void handleClusterButtonAction() {
-        executeScript("kmeans", "4");
+        String param = clusterParamField.getText().isEmpty() ? "4" : clusterParamField.getText();
+        executeScript("kmeans", param);
     }
 
     @FXML
     public void handleOutlierDetectionButtonAction() {
-        executeScript("forest", "0.1");
+        String param = outlierParamField.getText().isEmpty() ? "0.1" : outlierParamField.getText();
+        executeScript("forest", param);
     }
 
     @FXML
     public void handleStandardizationButtonAction() {
-        executeScript("standardize", "minmax");
+        String param = standardizeParamField.getValue() == null ? "minmax" : standardizeParamField.getValue();
+        executeScript("standardize", param);
     }
 
     @FXML
     public void handlePcaButtonAction() {
-        executeScript("pca", "2");
+        String param = pcaParamField.getText().isEmpty() ? "5" : pcaParamField.getText();
+        executeScript("pca", param);
     }
+
 
     private void executeScript(String mode, String param) {
         try {

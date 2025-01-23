@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.impute import KNNImputer
 from sklearn.cluster import KMeans
 from sklearn.ensemble import IsolationForest
-from sklearn.preprocessing import MinMaxScaler, StandardScaler
+from sklearn.preprocessing import MinMaxScaler, StandardScaler, LabelEncoder
 from sklearn.decomposition import PCA
 import sys
 import os
@@ -96,23 +96,32 @@ def reduce_dimensions(data_path, output_path, n_components):
     try:
         validate_file_path(data_path)
         df = pd.read_csv(data_path)
+
+        encoders = {}
+        for col in df.select_dtypes(include=['object', 'category']).columns:
+            encoder = LabelEncoder()
+            df[col] = encoder.fit_transform(df[col].astype(str))
+            encoders[col] = encoder
+
+
         numeric_cols = validate_numeric_columns(df)
 
+
         pca = PCA(n_components=int(n_components))
-        reduced_data = pca.fit_transform(df[numeric_cols])
-        df_reduced = pd.DataFrame(reduced_data, columns=[f"PC{i+1}" for i in range(int(n_components))])
+        pca_transformed = pca.fit_transform(df[numeric_cols])
 
-        for col in df.columns:
-            if col not in numeric_cols:
-                df_reduced[col] = df[col]
 
-        df_reduced.to_csv(output_path, index=False)
-        print(f"Zredukowane dane zapisano do: {output_path}")
+        pca_columns = [f'PC{i+1}' for i in range(pca_transformed.shape[1])]
+        df_pca = pd.DataFrame(pca_transformed, columns=pca_columns)
+        df_pca.to_csv(output_path, index=False)
+        print(f"Dane po PCA zostały zapisane do: {output_path}")
 
     except Exception as e:
         print(f"Błąd: {e}")
 
-if __name__ == "__main__":
+
+
+if _name_ == "_main_":
     if len(sys.argv) < 2:
         print("Brak wystarczających argumentów. Użyj jednego z trybów: knn, kmeans, forest, standardize, pca.")
     else:
